@@ -22,7 +22,11 @@ export default function() {
 
   function hexbin(points) {
     var binsById = {}, bins = [], i, n = points.length;
-
+      
+    console.log("r: ", r)
+    console.log("dx: ", dx)
+    console.log("dy: ", dy)
+      
     for (i = 0; i < n; ++i) {
       if (isNaN(px = +x.call(null, point = points[i], i, points))
           || isNaN(py = +y.call(null, point, i, points))) continue;
@@ -33,17 +37,33 @@ export default function() {
           pj = Math.round(py = py / dy),
           pi = Math.round(px = px / dx - (pj & 1) / 2),
           py1 = py - pj;
-
+      console.log("px: ", px)
+      console.log("py: ", py)
+        
+      console.log("pi: ", pi)
+      console.log("pj: ", pj)
+        
+      console.log("py1: ", py1)  
+        
       if (Math.abs(py1) * 3 > 1) {
         var px1 = px - pi,
             pi2 = pi + (px < pi ? -1 : 1) / 2,
             pj2 = pj + (py < pj ? -1 : 1),
             px2 = px - pi2,
             py2 = py - pj2;
+        console.log("px1: ", px1)
+        console.log("pi2: ", pi2)
+
+        console.log("pj2: ", pj2)
+        console.log("px2: ", px2)
+
+        console.log("py2: ", py2)  
+          
         if (px1 * px1 + py1 * py1 > px2 * px2 + py2 * py2) pi = pi2 + (pj & 1 ? 1 : -1) / 2, pj = pj2;
       }
 
       var id = pi + "-" + pj, bin = binsById[id];
+      console.log("id: ", id)  
       if (bin) bin.push(point);
       else {
         bins.push(bin = binsById[id] = [point]);
